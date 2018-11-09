@@ -13,7 +13,7 @@ The training results will be displayed once the model has been fit and predictio
 
 ## Testing
 
-A text file can be uploaded from the application. The features are extracted and processed as in the training process. The fitted classied is unpickled from the stored folder (static) and labels of the features are predicted. The predicted classes are decoded and a histogram plot of the class distribution of the predicted labels is displayed.The predicted labels and the data corresponding to it can be downloaded from the application.
+A text file can be uploaded from the application. The features are extracted and processed as in the training process. The fitted classied is unpickled from the stored folder (static) and labels of the features are predicted. The predicted classes are decoded and a histogram plot of the class distribution of the predicted labels is displayed.The predicted labels and the data it corresponds to can be downloaded from the application.
 
 
 ## File Hierarchy
