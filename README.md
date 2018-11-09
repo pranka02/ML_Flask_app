@@ -1,4 +1,3 @@
-
 # ML App Using Flask
 
 This is an ML web application using Flask. It allows uploading .txt file which is then parsed and trained using the classifier the user inputs.I am hosting it on Google App Engine thorugh GCP. I will update the GCP version soon.
