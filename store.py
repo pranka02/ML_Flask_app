@@ -8,8 +8,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt 
 
 class store():
-	def __init__(self,static_dir):
+	def __init__(self,static_dir,root_path):
 		self.static_dir=static_dir
+		self.root_path = root_path
 
 	def dump(self,file,string):
 		url = os.path.join(self.static_dir,string+'.pkl')
@@ -61,9 +62,10 @@ class store():
 		plt.close()
 
 	def save_pred (self,data,pred):
-		df =pd.DataFrame({'text':data,
-						'label':pred})
-		url = os.path.join(self.static_dir+'pred.csv')
+		sh =pred.shape
+		df =pd.DataFrame({'text':data.tolist(),
+						'label':pred.T.tolist()})
+		url = os.path.join('pred.csv')
 		df.to_csv(url, index=False)
 
 		

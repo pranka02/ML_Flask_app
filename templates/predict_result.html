@@ -24,7 +24,7 @@
                 <input type=file name=train >
                 <input type=submit value=Upload >
             </form>
-            <p>LR = Logistic Regression, NV = Naive Bayes classifier, DT = Decision Tree </p> 
+            <p>LR = Logistic Regression, NV = Naive Bayes, DT = Decision Tree </p> 
             <form action="/train_result" method="post">
                 <input type=text name=train></input>
                 <br>
@@ -42,10 +42,13 @@
                 <input type=file name=test >
                 <input type=submit value=Upload>
             </form>
-            <br>
             <form action="/predict_result" method="post">
                  <p style="font-size: 0.97em;font-family:'Roboto',sans-serif;padding-bottom: 0.5em"> Predicting using selected model </p>
                 <button class ="press" type="submit" value=Predict>Predict</button>
+            </form>
+            <br>
+            <form method =post action = "{{url_for('download_pred_file',filename='pred.csv')}}" >
+            <input class = "press" type="submit" value=Download></input>
             </form>
         </div>      
     </div>

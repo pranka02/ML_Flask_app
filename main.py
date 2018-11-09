@@ -19,10 +19,6 @@ import logging
 from flask import Flask, flash, request, redirect, url_for, render_template,send_from_directory
 from werkzeug.utils import secure_filename
 
-
-
-# root = os.path.dirname(os.path.realpath(__file__))
-# upload_path = os.path.join(root,'Uploads')
 allowed_ext = set(['txt'])
 allowed_clf = set(['LR','NB','DT'])
 
@@ -38,16 +34,13 @@ def index():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['upload_path'],
+    return send_from_directory(app.config['upload_path'],filename)
 
-                               filename)
-@app.route('/uploads/')
-
-def download_pred_file():
+@app.route('/uploads/<filename>',methods=['GET','POST'])
+def download_pred_file(filename):
 	if request.method =='POST' and 'Download':
-		filename = 'pred.csv'
-		return send_from_directory(app.config['upload_path'],
-                               filename)
+		# st_path = os.path.join(app.root_path, app.config['static_path'])
+		return send_from_directory(app.root_path,filename)
 
 
 def allowed_file(filename):
@@ -120,7 +113,7 @@ def train():
 		string = str('train')
 		hist_n = string+"hist.jpeg"
 		cnmt_n = string+"cnmt.jpeg"
-		pkl_hnd = store(app.config['static_path'])
+		pkl_hnd = store(app.config['static_path'],app.root_path)
 
 		# Feature extraction
 		data = utils.file_parser(os.path.join(app.config['upload_path'],"data.txt"))
@@ -177,7 +170,7 @@ def predict():
 	hist_pred_n = string+"hist_pred.jpeg"
 
 	# Loading from .pkl files 
-	pkl_hnd = store(app.config['static_path'])
+	pkl_hnd = store(app.config['static_path'],app.root_path)
 	clf = pkl_hnd.load('model')
 	n_labels = pkl_hnd.load('n_labels')
 	enc = pkl_hnd.load('enc')
@@ -206,4 +199,4 @@ def predict():
 
 
 if __name__ == '__main__':
-	app.run(host="127.0.0.1",port=8080,debug=True)
+	app.run(host="127.0.0.1",port=7770,debug=True)
