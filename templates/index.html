@@ -42,11 +42,13 @@
                 <input type=file name=test >
                 <input type=submit value=Upload>
             </form>
-            <br>
             <form action="/predict_result" method="post">
                  <p style="font-size: 0.97em;font-family:'Roboto',sans-serif;padding-bottom: 0.5em"> Predicting using selected model </p>
                 <button class ="press" type="submit" value=Predict>Predict</button>
             </form>
+            <br>
+            <form method =post <!-- action = "{{url_for('download_pred_file')}}" -->
+            <button class ="press" type="submit" value=Download>Download</button>
         </div>      
     </div>
     

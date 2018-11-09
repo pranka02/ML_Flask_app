@@ -1,5 +1,7 @@
 import numpy as np
 import os
+import itertools
+import pandas as pd
 from sklearn.externals import joblib
 import matplotlib
 matplotlib.use('Agg')
@@ -18,7 +20,7 @@ class store():
 		return joblib.load(url)
 
 	def plot_confusion_matrix(self,cm, classes,cnmt_n,
-	                          normalize=False,
+	                          normalize=True,
 	                          title='Confusion matrix',
 	                          cmap=plt.cm.Blues,):
 	    if normalize:
@@ -57,6 +59,13 @@ class store():
 		plt.ylabel("Number of instances")
 		plt.savefig(url,dpi=100,transparent=True)
 		plt.close()
+
+	def save_pred (self,data,pred):
+		df =pd.DataFrame({'text':data,
+						'label':pred})
+		url = os.path.join(self.static_dir+'pred.csv')
+		df.to_csv(url, index=False)
+
 		
 
 

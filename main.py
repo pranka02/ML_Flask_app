@@ -30,7 +30,7 @@ app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 app.config['upload_path'] = 'uploads'
-app.config['static_path'] = 'Static'
+app.config['static_path'] = 'static'
 
 @app.route("/")
 def index():
@@ -39,7 +39,16 @@ def index():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['upload_path'],
+
                                filename)
+@app.route('/uploads/')
+
+def download_pred_file():
+	if request.method =='POST' and 'Download':
+		filename = 'pred.csv'
+		return send_from_directory(app.config['upload_path'],
+                               filename)
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -150,7 +159,7 @@ def train():
 		pkl_hnd.dump(n_labels,'n_labels')							# storing labels
 		cnf_matrix = st.cnf_mtx()
 		pkl_hnd.plot_confusion_matrix(cnf_matrix, n_labels,cnmt_n,
-	                          normalize=False,
+	                          normalize=True,
 	                          title='Confusion matrix',
 	                          cmap=plt.cm.Blues,)
 
@@ -186,13 +195,14 @@ def predict():
 
 	# Decoding the encoded prediction
 	pred = utils.label_encoder(pred_enc,True,enc)
+	pkl_hnd.save_pred(data_x,pred)
+	# Saving predicted value and data into .csv file
 
 	#Plotting histogram of prediction
 	pkl_hnd.plot_hist(pred,hist_pred_n)
 
-
-	return render_template("predict_result.html",accuracy = acc, 
-							img_hist_p =url_for(app.config['static_path'],filename = hist_pred_n))
+	return render_template("predict_result.html",img_hist_pred =url_for(app.config['static_path'],filename = hist_pred_n),
+						)
 
 
 if __name__ == '__main__':
