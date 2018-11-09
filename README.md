@@ -7,7 +7,7 @@ This is an ML web application using Flask. It allows uploading .txt file which i
 
 The web application allows users to input text files with training data of the form 'label_1 \t text_1 \n' and takes user input to choose the base classifier model from Logistic Regression, Naive Bayes and Decision Tree. 
 
-The text data is converted to features using TF-IDF vectorization. A truncated Singular Valued Decomposition(SVD) algorithm is applied to the features for dimensionality reduction. The features are then normalized and balanced of any class imbalances using the SMOTE algorithm. The labels are encoded using a label binarizer. The base classifier chosen is coupled up with an ensemble algorithm, Bagged Decision Tree for performance. The hyperparameters for the base estimator are found using gridsearch. The model is fit on the data and  saved for reteieval for prediction.
+The text data is converted to features using TF-IDF vectorization. A truncated Singular Valued Decomposition(SVD) algorithm is applied to the features for dimensionality reduction. The features are then normalized and balanced of any class imbalances using the SMOTE algorithm. The labels are encoded using a label binarizer. The base classifier chosen is coupled up with an ensemble algorithm, Bagged Decision Tree for performance. The hyperparameters for the base estimator are found using gridsearch cross-validation. The model is fit on the data and  saved for reteieval for prediction.
 
 The training results will be displayed once the model has been fit and prediction on the validation set is complete. The confusion matrix and a histogram plot of the class distribution of the entire are displayed.
 
