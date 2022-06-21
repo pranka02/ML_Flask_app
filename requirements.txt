@@ -15,7 +15,7 @@ matplotlib==2.1.0
 
 multiprocess==0.70.5
 
-numpy==1.13.3
+numpy==1.22.0
 
 oauthlib==2.0.6
 
